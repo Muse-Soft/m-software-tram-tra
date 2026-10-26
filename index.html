@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trầm Trà — Quán trà đạo</title>
+<meta name="description" content="Trầm Trà — quán trà đạo theo tinh thần wabi-sabi: ít đồ đạc, nhiều khoảng trống, một chén trà ngon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --nen:#EFE9DC; --nen-phu:#F7F2E7; --chu:#23301F; --chu-phu:#5F6E58;
+    --nhan:#8A6D3B; --vien:#D9CBA9;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--nen);color:var(--chu);
+    font-family:"Be Vietnam Pro",system-ui,sans-serif;font-weight:300;line-height:1.75}
+  h1,h2,h3{font-family:"Lora",Georgia,serif;font-weight:600;line-height:1.3;margin:0}
+  a{color:var(--nhan)}
+  img{display:block;width:100%;object-fit:cover;
+    filter:sepia(.16) saturate(.88) brightness(1.02)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  /* Thanh điều hướng */
+  header.nav{position:sticky;top:0;z-index:10;background:rgba(239,233,220,.94);
+    border-bottom:1px solid var(--vien)}
+  header.nav .wrap{display:flex;align-items:center;justify-content:space-between;
+    padding-top:14px;padding-bottom:14px}
+  .logo{font-family:"Lora",serif;font-size:24px;font-weight:600;letter-spacing:.5px;
+    text-decoration:none;color:var(--chu)}
+  nav.links{display:flex;gap:22px;flex-wrap:wrap}
+  nav.links a{text-decoration:none;color:var(--chu-phu);font-size:15px}
+  nav.links a:hover{color:var(--nhan)}
+  /* Dải báo ảnh mẫu */
+  .sample-note{background:var(--nen-phu);border-bottom:1px solid var(--vien);
+    text-align:center;font-size:14px;color:var(--chu-phu);padding:10px 16px}
+  /* Lời mở — Hero 16:9 */
+  .hero{position:relative;aspect-ratio:16/9;overflow:hidden;background:#ddd}
+  .hero img{height:100%}
+  .hero::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(35,48,31,.62),rgba(35,48,31,.08) 55%)}
+  .hero-text{position:absolute;z-index:1;left:0;right:0;bottom:0;color:#F7F2E7;
+    padding:48px 0}
+  .hero-text h1{font-size:clamp(48px,8vw,96px);letter-spacing:1px}
+  .hero-text p{font-size:clamp(16px,2.2vw,22px);max-width:640px;margin:12px 0 24px}
+  .btn{display:inline-block;background:var(--nhan);color:#F7F2E7;text-decoration:none;
+    padding:14px 32px;border-radius:2px;font-size:16px;font-weight:500;border:0;cursor:pointer}
+  .btn:hover{filter:brightness(1.1)}
+  /* Các chương */
+  section.chuong{padding:96px 0}
+  section.chuong.alt{background:var(--nen-phu)}
+  .nhan-chuong{color:var(--nhan);font-size:14px;letter-spacing:3px;
+    text-transform:uppercase;margin-bottom:8px}
+  .chuong h2{font-size:clamp(30px,4.5vw,44px);margin-bottom:6px}
+  /* Điểm nhấn "Hơi trà": vạch 64x3px + nét cong chữ S cao 16px */
+  .hoi-tra{display:block;margin:10px 0 28px}
+  .chuong-intro{color:var(--chu-phu);max-width:680px;margin:0 0 36px}
+  /* Chương I: ảnh 4:3 trước văn bản */
+  .hai-cot{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  .hai-cot figure{margin:0}
+  .hai-cot img{aspect-ratio:4/3;border:1px solid var(--vien)}
+  .hai-cot figcaption{font-size:14px;color:var(--chu-phu);margin-top:10px}
+  /* Chương II: ảnh lớn 16:9 xếp dọc 1 cột, khoảng trắng lớn */
+  .goc-ngoi{margin:0 0 72px}
+  .goc-ngoi:last-child{margin-bottom:0}
+  .goc-ngoi img{aspect-ratio:16/9;border:1px solid var(--vien)}
+  .goc-ngoi figcaption{margin-top:14px}
+  .goc-ngoi figcaption strong{font-family:"Lora",serif;font-size:22px;font-weight:600}
+  .goc-ngoi figcaption p{margin:4px 0 0;color:var(--chu-phu)}
+  /* Chương III: thẻ món ảnh 4:3 */
+  .menu{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+  .mon{background:var(--nen-phu);border:1px solid var(--vien);padding-bottom:20px}
+  .mon img{aspect-ratio:4/3;border-bottom:1px solid var(--vien)}
+  .mon h3{font-size:22px;padding:18px 20px 4px}
+  .mon p{padding:0 20px;margin:6px 0;color:var(--chu-phu);font-size:15px}
+  .mon .gia{color:var(--nhan);font-weight:600;font-size:18px;padding:8px 20px 0}
+  .mon .gia small{display:block;color:var(--chu-phu);font-weight:300;font-size:13px}
+  .gia-note{margin-top:24px;color:var(--chu-phu);font-size:14px}
+  /* Chương IV: 5 bước, ảnh 16:9 */
+  .buoc{display:grid;grid-template-columns:72px 1fr;gap:28px;
+    padding:36px 0;border-top:1px solid var(--vien)}
+  .buoc:last-child{border-bottom:1px solid var(--vien)}
+  .so-buoc{font-family:"Lora",serif;font-size:44px;color:var(--nhan);line-height:1}
+  .buoc img{aspect-ratio:16/9;border:1px solid var(--vien);margin-bottom:14px}
+  .buoc h3{font-size:24px;margin-bottom:6px}
+  .buoc p{margin:0;color:var(--chu-phu);max-width:720px}
+  /* Chương V: lịch + form */
+  .lich{width:100%;border-collapse:collapse;margin-bottom:56px;background:var(--nen)}
+  .lich th,.lich td{border:1px solid var(--vien);padding:14px 18px;text-align:left}
+  .lich th{background:var(--nen-phu);font-family:"Lora",serif}
+  .lich td{color:var(--chu-phu)}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+  form{background:var(--nen-phu);border:1px solid var(--vien);padding:32px}
+  form h3{font-size:24px;margin-bottom:20px}
+  label{display:block;font-size:15px;margin-bottom:16px}
+  input,select,textarea{width:100%;margin-top:6px;padding:12px 14px;
+    border:1px solid var(--vien);background:#fff;color:var(--chu);
+    font-family:"Be Vietnam Pro",sans-serif;font-size:15px}
+  textarea{resize:vertical;min-height:110px}
+  .form-msg{display:none;margin-top:16px;padding:12px 16px;
+    background:var(--nen);border:1px solid var(--nhan);color:var(--chu);font-size:15px}
+  /* Chân trang */
+  footer{background:var(--chu);color:#EFE9DC;padding:64px 0 40px;margin-top:0}
+  footer h2{font-size:28px;margin-bottom:16px}
+  footer ul{list-style:none;padding:0;margin:0;color:#CFC8B8;line-height:2}
+  footer .can-bo-sung{color:#D9CBA9}
+  footer .ban-quyen{margin-top:40px;padding-top:20px;border-top:1px solid #3E4A3A;
+    font-size:14px;color:#9AA392}
+  /* Responsive: dưới 767px xếp 1 cột, ảnh trước chữ, nút rộng toàn phần */
+  @media (max-width:767px){
+    nav.links{display:none}
+    .hero{aspect-ratio:auto;min-height:70vh}
+    .hero img{position:absolute;inset:0;height:100%}
+    .hero-text{padding:32px 0}
+    section.chuong{padding:64px 0}
+    .hai-cot,.menu,.form-grid{grid-template-columns:1fr}
+    .hai-cot{gap:28px}
+    .btn{width:100%;text-align:center}
+    form{padding:24px 20px}
+    .buoc{grid-template-columns:48px 1fr;gap:18px}
+    .so-buoc{font-size:32px}
+    .goc-ngoi{margin-bottom:48px}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#">Trầm Trà</a>
+    <nav class="links">
+      <a href="#chuong-1">Chương I</a>
+      <a href="#chuong-2">Chương II</a>
+      <a href="#chuong-3">Chương III</a>
+      <a href="#chuong-4">Chương IV</a>
+      <a href="#chuong-5">Chương V</a>
+    </nav>
+  </div>
+</header>
+
+<div class="sample-note">Ảnh và nội dung trên trang này là ảnh mẫu minh họa — địa chỉ, điện thoại, giờ mở cửa và lịch trà đạo thật sẽ được bổ sung sau.</div>
+
+<!-- Lời mở — Hero -->
+<section class="hero">
+  <img src="images/hero.jpg" alt="Ấm trà bốc khói trên bàn gỗ mộc (ảnh mẫu)">
+  <div class="hero-text">
+    <div class="wrap">
+      <h1>Trầm Trà</h1>
+      <p>Một chén trà ngon, một khoảng lặng đủ đầy. Quán trà đạo theo tinh thần wabi-sabi — ít đồ đạc, nhiều khoảng trống, ánh sáng tự nhiên.</p>
+      <a class="btn" href="#chuong-5">Đặt chỗ</a>
+    </div>
+  </div>
+</section>
+
+<!-- Chương I — Triết lý trà đạo + câu chuyện quán -->
+<section class="chuong" id="chuong-1">
+  <div class="wrap">
+    <div class="nhan-chuong">Chương I</div>
+    <h2>Triết lý trà đạo</h2>
+    <svg class="hoi-tra" width="84" height="19" viewBox="0 0 84 19" fill="none" aria-hidden="true"><line x1="0" y1="16" x2="64" y2="16" stroke="#8A6D3B" stroke-width="3"/><path d="M64 16 C70 16 70 9 75 8 C79 7 79 2 84 0" stroke="#8A6D3B" stroke-width="2"/></svg>
+    <div class="hai-cot">
+      <figure>
+        <img src="images/chuong1.jpg" alt="Chén trà trên bàn gỗ, ánh nến ấm (ảnh mẫu)">
+        <figcaption>Trà không vội. Người pha trà cũng không vội.</figcaption>
+      </figure>
+      <div>
+        <p>Trầm Trà bắt đầu từ một niềm tin giản dị: một chén trà ngon không cần phô trương. Nước vừa đủ nóng, lá trà vừa đủ thức, người uống vừa đủ lặng — thế là đủ.</p>
+        <p>Quán lấy cảm hứng từ trà thất Nhật Bản tối giản: gỗ mộc, gốm thô, chiếu tatami và một khu vườn nhỏ ngoài cửa sổ. Mỗi buổi trà ở đây đều chậm rãi, không nhạc ồn, không vội vã.</p>
+        <p>Chúng tôi chọn trà Việt và trà Á Đông tuyển chọn, pha bằng ấm gốm và nước suối đun sôi để nguội đúng độ. Câu chuyện của quán cũng chỉ có vậy — và quán tin rằng vậy là đủ để khách quay lại.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Chương II — Không gian trà thất -->
+<section class="chuong alt" id="chuong-2">
+  <div class="wrap">
+    <div class="nhan-chuong">Chương II</div>
+    <h2>Không gian trà thất</h2>
+    <svg class="hoi-tra" width="84" height="19" viewBox="0 0 84 19" fill="none" aria-hidden="true"><line x1="0" y1="16" x2="64" y2="16" stroke="#8A6D3B" stroke-width="3"/><path d="M64 16 C70 16 70 9 75 8 C79 7 79 2 84 0" stroke="#8A6D3B" stroke-width="2"/></svg>
+    <p class="chuong-intro">Ba góc ngồi, ba nhịp thở khác nhau. Tất cả đều nhìn ra vườn, đều có chiếu tatami và bàn gỗ thấp.</p>
+
+    <figure class="goc-ngoi">
+      <img src="images/goc1.jpg" alt="Phòng trà tatami nhìn ra vườn (ảnh mẫu)">
+      <figcaption><strong>Góc nhìn vườn</strong><p>Bàn trà thấp giữa phòng, cửa shoji mở ra vườn rêu. Góc này hợp với buổi trà một mình hoặc hai người muốn yên tĩnh tuyệt đối.</p></figcaption>
+    </figure>
+
+    <figure class="goc-ngoi">
+      <img src="images/goc2.jpg" alt="Phòng trà với đèn lồng giấy và bàn dài (ảnh mẫu)">
+      <figcaption><strong>Góc đèn lồng</strong><p>Đèn giấy ấm, bàn gỗ dài, đủ chỗ cho nhóm bốn đến sáu người. Buổi tối, ánh đèn là thứ duy nhất còn sáng trong phòng.</p></figcaption>
+    </figure>
+
+    <figure class="goc-ngoi">
+      <img src="images/goc3.jpg" alt="Bàn trà thấp với ấm gang và đệm ngồi (ảnh mẫu)">
+      <figcaption><strong>Góc bàn thấp</strong><p>Ấm gang, đệm ngồi bệt, cửa sổ giấy đón nắng xiên. Góc nhỏ nhất quán, cũng là góc được đặt trước nhiều nhất.</p></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- Chương III — Thực đơn -->
+<section class="chuong" id="chuong-3">
+  <div class="wrap">
+    <div class="nhan-chuong">Chương III</div>
+    <h2>Thực đơn trà &amp; bánh</h2>
+    <svg class="hoi-tra" width="84" height="19" viewBox="0 0 84 19" fill="none" aria-hidden="true"><line x1="0" y1="16" x2="64" y2="16" stroke="#8A6D3B" stroke-width="3"/><path d="M64 16 C70 16 70 9 75 8 C79 7 79 2 84 0" stroke="#8A6D3B" stroke-width="2"/></svg>
+    <p class="chuong-intro">Mỗi món đều có ấm riêng, pha tại bàn. Giá dưới đây là giá mẫu, sẽ chốt lại khi quán công bố thực đơn chính thức.</p>
+
+    <div class="menu">
+      <article class="mon">
+        <img src="images/menu-sen.jpg" alt="Chén trà sen (ảnh mẫu)">
+        <h3>Trà sen</h3>
+        <p>Sen tươi ướp trong lá trà xanh, hương thoảng nhẹ, hậu vị ngọt thanh.</p>
+        <div class="gia">từ 45.000đ<small>giá mẫu</small></div>
+      </article>
+      <article class="mon">
+        <img src="images/menu-oolong.jpg" alt="Chén trà ô long (ảnh mẫu)">
+        <h3>Trà ô long</h3>
+        <p>Lá trà bán lên men, nước trà vàng óng, hương rang mật ong dịu dàng.</p>
+        <div class="gia">từ 60.000đ<small>giá mẫu</small></div>
+      </article>
+      <article class="mon">
+        <img src="images/menu-banh.jpg" alt="Bánh ăn kèm trà (ảnh mẫu)">
+        <h3>Bánh đậu xanh</h3>
+        <p>Bánh đậu xanh bùi mịn, ăn kèm trà sen hoặc ô long đều hợp.</p>
+        <div class="gia">từ 35.000đ<small>giá mẫu</small></div>
+      </article>
+    </div>
+    <p class="gia-note">Lưu ý: mọi giá trên trang đều là giá mẫu. Giá chính thức do quán công bố sau.</p>
+  </div>
+</section>
+
+<!-- Chương IV — Nghi thức pha trà -->
+<section class="chuong alt" id="chuong-4">
+  <div class="wrap">
+    <div class="nhan-chuong">Chương IV</div>
+    <h2>Nghi thức pha trà</h2>
+    <svg class="hoi-tra" width="84" height="19" viewBox="0 0 84 19" fill="none" aria-hidden="true"><line x1="0" y1="16" x2="64" y2="16" stroke="#8A6D3B" stroke-width="3"/><path d="M64 16 C70 16 70 9 75 8 C79 7 79 2 84 0" stroke="#8A6D3B" stroke-width="2"/></svg>
+    <p class="chuong-intro">Năm bước, không bước nào được vội. Người pha trà làm đúng từng bước trước mặt khách.</p>
+
+    <div class="buoc">
+      <div class="so-buoc">1</div>
+      <div>
+        <img src="images/goc3.jpg" alt="Bàn trà đã chuẩn bị ấm chén (ảnh mẫu)">
+        <h3>Tráng ấm</h3>
+        <p>Tráng ấm chén bằng nước sôi để làm ấm dụng cụ và gột mùi cũ, rồi đổ bỏ nước tráng.</p>
+      </div>
+    </div>
+    <div class="buoc">
+      <div class="so-buoc">2</div>
+      <div>
+        <img src="images/nghi-matcha.jpg" alt="Bột trà và chổi tre trên bàn gỗ (ảnh mẫu)">
+        <h3>Đánh thức trà</h3>
+        <p>Cho lá trà vào ấm, lắc nhẹ và ngửi hương khô — lá trà bắt đầu “thức” trước khi gặp nước.</p>
+      </div>
+    </div>
+    <div class="buoc">
+      <div class="so-buoc">3</div>
+      <div>
+        <img src="images/menu-sen.jpg" alt="Trà đang hãm trong chén thủy tinh (ảnh mẫu)">
+        <h3>Hãm</h3>
+        <p>Rót nước đúng nhiệt độ, đậy nắp và chờ. Thời gian hãm tùy loại trà, thường từ một đến ba phút.</p>
+      </div>
+    </div>
+    <div class="buoc">
+      <div class="so-buoc">4</div>
+      <div>
+        <img src="images/hero.jpg" alt="Ấm trà trên khay gỗ (ảnh mẫu)">
+        <h3>Rót</h3>
+        <p>Rót đều tay qua từng chén, mỗi chén một lượng ngang nhau — chén nào cũng cùng một vị.</p>
+      </div>
+    </div>
+    <div class="buoc">
+      <div class="so-buoc">5</div>
+      <div>
+        <img src="images/chuong1.jpg" alt="Chén trà đã rót xong, sẵn sàng thưởng thức (ảnh mẫu)">
+        <h3>Thưởng</h3>
+        <p>Ngửi hương, nhấp từng ngụm nhỏ, để vị trà tan chậm. Không nói to, không vội vàng.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Chương V — Lịch trà đạo + đặt chỗ + liên hệ -->
+<section class="chuong" id="chuong-5">
+  <div class="wrap">
+    <div class="nhan-chuong">Chương V</div>
+    <h2>Lịch trà đạo &amp; đặt chỗ</h2>
+    <svg class="hoi-tra" width="84" height="19" viewBox="0 0 84 19" fill="none" aria-hidden="true"><line x1="0" y1="16" x2="64" y2="16" stroke="#8A6D3B" stroke-width="3"/><path d="M64 16 C70 16 70 9 75 8 C79 7 79 2 84 0" stroke="#8A6D3B" stroke-width="2"/></svg>
+    <p class="chuong-intro">Lịch buổi trà dưới đây là lịch mẫu. Form đặt chỗ và form liên hệ hiện chỉ là giao diện demo — chưa gửi dữ liệu thật.</p>
+
+    <table class="lich">
+      <thead><tr><th>Buổi trà</th><th>Thời gian (mẫu)</th><th>Ghi chú</th></tr></thead>
+      <tbody>
+        <tr><td>Trà sáng — Sen sớm</td><td>Thứ Bảy, 8:00 – 9:30</td><td>Trà sen, tối đa 8 khách</td></tr>
+        <tr><td>Trà chiều — Ô long</td><td>Chủ Nhật, 15:00 – 16:30</td><td>Trà ô long, tối đa 8 khách</td></tr>
+        <tr><td>Nghi thức trà đạo</td><td>Cuối tháng, 19:00 – 20:30</td><td>Đủ 5 bước, cần đặt trước</td></tr>
+      </tbody>
+    </table>
+
+    <div class="form-grid">
+      <form id="form-datcho">
+        <h3>Đặt chỗ</h3>
+        <label>Họ tên
+          <input type="text" name="hoten" placeholder="Tên của bạn" required>
+        </label>
+        <label>Số điện thoại
+          <input type="tel" name="sdt" placeholder="Số điện thoại liên hệ" required>
+        </label>
+        <label>Buổi trà muốn tham dự
+          <select name="buoi">
+            <option>Trà sáng — Sen sớm (Thứ Bảy)</option>
+            <option>Trà chiều — Ô long (Chủ Nhật)</option>
+            <option>Nghi thức trà đạo (cuối tháng)</option>
+          </select>
+        </label>
+        <label>Số khách
+          <input type="number" name="sokhach" min="1" max="8" value="2">
+        </label>
+        <button class="btn" type="submit">Gửi yêu cầu đặt chỗ</button>
+        <div class="form-msg">Đây là bản demo giao diện — thông tin của bạn chưa được gửi đi. Quán sẽ mở form đặt chỗ thật sau khi công bố lịch chính thức.</div>
+      </form>
+
+      <form id="form-lienhe">
+        <h3>Liên hệ</h3>
+        <label>Họ tên
+          <input type="text" name="hoten" placeholder="Tên của bạn" required>
+        </label>
+        <label>Email
+          <input type="email" name="email" placeholder="Email liên hệ" required>
+        </label>
+        <label>Lời nhắn
+          <textarea name="loinhan" placeholder="Bạn muốn hỏi gì về quán, về trà, về buổi trà đạo?"></textarea>
+        </label>
+        <button class="btn" type="submit">Gửi lời nhắn</button>
+        <div class="form-msg">Đây là bản demo giao diện — lời nhắn của bạn chưa được gửi đi. Thông tin liên hệ thật của quán sẽ được bổ sung sau.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <h2>Trầm Trà</h2>
+    <ul>
+      <li>Địa chỉ: <span class="can-bo-sung">[CẦN BỔ SUNG]</span></li>
+      <li>Điện thoại: <span class="can-bo-sung">[CẦN BỔ SUNG]</span></li>
+      <li>Giờ mở cửa: <span class="can-bo-sung">[CẦN BỔ SUNG]</span></li>
+      <li>Mạng xã hội: <span class="can-bo-sung">[CẦN BỔ SUNG]</span></li>
+    </ul>
+    <p class="ban-quyen">Trầm Trà — quán trà đạo. Trang này là bản demo: mọi ảnh, giá, lịch và thông tin liên hệ đều là mẫu minh họa, chờ dữ liệu thật từ chủ quán.</p>
+  </div>
+</footer>
+
+<script>
+  // Form chỉ làm giao diện: chặn gửi thật, chỉ hiện thông báo mẫu.
+  document.querySelectorAll("form").forEach(function (f) {
+    f.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var msg = f.querySelector(".form-msg");
+      if (msg) msg.style.display = "block";
+    });
+  });
+</script>
+</body>
+</html>
